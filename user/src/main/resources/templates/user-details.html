@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Пользователи сайта</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<div class="container mt-5">
+    <h1>Пользователи сайта</h1>
+    <div th:each="el : ${person}" class="alert alert-info mt-2">
+        <h1 th:text="${el.name} + ' ' + ${el.surname}"/>
+        <p><b>Возраст: </b> <span th:text="${el.age}"/></p>
+        <p><b>Email: </b> <span th:text="${el.email}"/></p>
+        <p><b>Дата рождения: </b> <span th:text="${el.birth_date}"/></p>
+        <p><b>Телефон: </b> <span th:text="${el.phone_number}"/></p>
+        <p><b>Женат/Замужем: </b> <span th:text="${el.married}"/></p>
+        <a th:href="'/user/' + ${el.id} + '/edit'" class="btn-warning" type="submit">Редактировать</a><br><br>
+        <form th:action="'/user/' + ${el.id} + '/remove'" method="post">
+            <button class="btn-warning" type="submit">Удалить</button>
+        </form>
+    </div>
+</div>
+
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>
